@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="purple">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZenType Pro</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Zen<span>Type</span></div>
+  <div class="nav-links">
+    <a href="#">Features</a>
+    <a href="#">How It Works</a>
+    <a href="#">About</a>
+  </div>
+  <div class="nav-right">
+    <div class="theme-switcher">
+      <label>Theme</label>
+      <div class="theme-dots">
+        <div class="tdot active" data-t="purple" title="Purple (default)"></div>
+        <div class="tdot" data-t="mocha" title="Mocha (Beige & Brown)"></div>
+        <div class="tdot" data-t="ocean" title="Ocean (Light & Dark Blue)"></div>
+        <div class="tdot" data-t="obsidian" title="Obsidian (Dark)"></div>
+        <div class="tdot" data-t="contrast" title="High Contrast (Black & Yellow)"></div>
+      </div>
+    </div>
+    <button class="nav-btn">Get Started</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>Maximize Your<br><em>Typing Speed</em></h1>
+  <p>Test your speed, track accuracy, and level up your typing. The ultimate practice experience.</p>
+  <div class="hero-btns">
+    <button class="btn-hero" onclick="scrollToTest()">▶ Start Typing Now</button>
+    <button class="btn-ghost">Learn More</button>
+  </div>
+</div>
+
+<div class="stats-strip">
+  <div class="strip-stat"><div class="big">209K+</div><small>Active Users</small></div>
+  <div class="strip-stat"><div class="big">100M+</div><small>Tests Taken</small></div>
+  <div class="strip-stat"><div class="big">99.8%</div><small>Uptime</small></div>
+  <div class="strip-stat"><div class="big">4.9★</div><small>User Rating</small></div>
+</div>
+
+<div class="main">
+
+  <div class="card config-card">
+    <div class="config-left">
+      <h3>Customize Your Test</h3>
+      <p>Choose difficulty and duration to match your skill level</p>
+    </div>
+    <div class="config-right">
+      <div class="cfg-group">
+        <label>Difficulty</label>
+        <div class="pill-row" id="difficulty">
+          <span class="pill active" data-val="easy">Easy</span>
+          <span class="pill" data-val="medium">Medium</span>
+          <span class="pill" data-val="hard">Hard</span>
+        </div>
+      </div>
+      <div class="cfg-group">
+        <label>Duration</label>
+        <select id="timer-select" class="csel">
+          <option value="15">15 sec</option>
+          <option value="30" selected>30 sec</option>
+          <option value="60">1 min</option>
+          <option value="120">2 min</option>
+          <option value="300">5 min</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="live-stats">
+    <div class="lstat"><div class="icon">⏱</div><small>Time Left</small><div class="val" id="timer-val">30</div></div>
+    <div class="lstat"><div class="icon">⚡</div><small>WPM</small><div class="val" id="wpm-val">0</div></div>
+    <div class="lstat"><div class="icon">🎯</div><small>Accuracy</small><div class="val" id="acc-val">100%</div></div>
+    <div class="lstat"><div class="icon">📝</div><small>Words Done</small><div class="val" id="words-done">0</div></div>
+  </div>
+
+  <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" id="progress"></div></div></div>
+
+  <div class="card typing-card" id="typing-box" onclick="focusInput()">
+    <div class="typing-header">
+      <div class="status-badge"><div class="sdot" id="sdot"></div><span id="stext">Click to start typing…</span></div>
+      <div class="brand-tag">ZenType Pro</div>
+    </div>
+    <div id="words"></div>
+    <input type="text" id="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  </div>
+
+  <p class="hint">Press <kbd>Esc</kbd> to restart &nbsp;·&nbsp; <kbd>Space</kbd> to submit word &nbsp;·&nbsp; Timer starts on first keystroke</p>
+  <div class="actions"><button class="restart-btn" onclick="initGame()">↺ &nbsp;Restart Test</button></div>
+
+  <div class="card history-card">
+    <h3>📋 Recent Results <span class="cnt" id="hist-count">0 tests</span></h3>
+    <div id="history-body"><p class="no-hist">No tests yet — complete a test to see your history.</p></div>
+  </div>
+
+  <div class="features">
+    <div class="sec-label"><h2>Comprehensive Feature Set</h2><p>Everything you need to improve your typing speed and accuracy</p></div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-icon">⚡</div><h4>Real-time WPM</h4><p>Live words-per-minute calculation as you type for instant feedback.</p></div>
+      <div class="feat-card"><div class="feat-icon">🎯</div><h4>Accuracy Tracking</h4><p>Precise character-level accuracy so you know where to improve.</p></div>
+      <div class="feat-card"><div class="feat-icon">📊</div><h4>Difficulty Levels</h4><p>Three curated word banks — Easy, Medium, and Hard.</p></div>
+      <div class="feat-card"><div class="feat-icon">⏱</div><h4>Custom Durations</h4><p>Pick from 15 seconds to 5 minutes for any session.</p></div>
+      <div class="feat-card"><div class="feat-icon">🏆</div><h4>Result History</h4><p>All past tests logged with WPM, accuracy, and grade.</p></div>
+      <div class="feat-card"><div class="feat-icon">🎨</div><h4>5 Themes</h4><p>Purple, Mocha, Ocean, Obsidian, and High Contrast. Switch anytime.</p></div>
+    </div>
+  </div>
+
+  <div class="cta-banner">
+    <div>
+      <h3>Ready? Let's Start with ZenType<br>and Get Awesome Experience</h3>
+      <p>Join 209,000+ typists improving their speed every day</p>
+    </div>
+    <button class="btn-hero" onclick="scrollToTest()">Start Free Now →</button>
+  </div>
+
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="result-card">
+    <div class="trophy">🏆</div>
+    <h2>Test Complete!</h2>
+    <p class="sub">Here's how you performed</p>
+    <div class="grade-badge" id="r-grade">Grade: B</div>
+    <div class="result-grid">
+      <div class="r-stat"><small>WPM</small><div class="big" id="r-wpm">0</div></div>
+      <div class="r-stat"><small>Accuracy</small><div class="big" id="r-acc">0%</div></div>
+      <div class="r-stat"><small>Duration</small><div class="big" id="r-time">0s</div></div>
+      <div class="r-stat"><small>Words Done</small><div class="big" id="r-words">0</div></div>
+    </div>
+    <button class="restart-btn" style="width:100%;justify-content:center" onclick="initGame()">↺ &nbsp;Try Again</button>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
