@@ -2,7 +2,7 @@
 <html lang="en" data-theme="purple">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>ZenType Pro</title>
 <link rel="stylesheet" href="style.css">
 
@@ -11,134 +11,517 @@
 
 <nav>
   <div class="nav-logo">Zen<span>Type</span></div>
-  <div class="nav-links">
-    <a href="#">Features</a>
-    <a href="#">How It Works</a>
-    <a href="#">About</a>
+  <div class="nav-tabs">
+    <button class="ntab active" onclick="showPage('solo')">Solo</button>
+    <button class="ntab" onclick="showPage('multi')">Multiplayer</button>
+    <button
+  class="btn-ghost"
+  onclick="showPage('profile')">Profile</button>
   </div>
   <div class="nav-right">
-    <div class="theme-switcher">
-      <label>Theme</label>
-      <div class="theme-dots">
-        <div class="tdot active" data-t="purple" title="Purple (default)"></div>
-        <div class="tdot" data-t="mocha" title="Mocha (Beige & Brown)"></div>
-        <div class="tdot" data-t="ocean" title="Ocean (Light & Dark Blue)"></div>
-        <div class="tdot" data-t="obsidian" title="Obsidian (Dark)"></div>
-        <div class="tdot" data-t="contrast" title="High Contrast (Black & Yellow)"></div>
-      </div>
-    </div>
-    <button class="nav-btn">Get Started</button>
+    <div class="tdot active" data-t="purple"></div>
+    <div class="tdot" data-t="mocha"></div>
+    <div class="tdot" data-t="ocean"></div>
+    <div class="tdot" data-t="obsidian"></div>
+    <div class="tdot" data-t="contrast"></div>
   </div>
 </nav>
 
-<div class="hero">
-  <h1>Maximize Your<br><em>Typing Speed</em></h1>
-  <p>Test your speed, track accuracy, and level up your typing. The ultimate practice experience.</p>
-  <div class="hero-btns">
-    <button class="btn-hero" onclick="scrollToTest()">▶ Start Typing Now</button>
-    <button class="btn-ghost">Learn More</button>
+ <!-- AUTH PAGE -->
+<div class="page active" id="page-auth">
+
+  <div class="auth-card">
+
+    <h1>Welcome to ZenType</h1>
+
+    <p class="muted">
+      Create your typing profile
+    </p>
+
+    <input
+      type="text"
+      id="signup-username"
+      placeholder="Username"
+      class="auth-input"
+    >
+    <input
+      type="email"
+      id="signup-email"
+      placeholder="Email"
+      class="auth-input"
+    >
+    <input
+      type="password"
+      id="signup-password"
+      placeholder="Password"
+      class="auth-input">
+    <button class="btn-hero" onclick="signUp()">Create Account</button>
+    <button
+      class="btn-ghost"
+      onclick="loginUser()">Login</button>
+      <button class="btn-ghost" onclick="resetPassword()">Forgot Password</button>
+    <p
+      id="auth-msg"
+      style="margin-top:12px;font-size:.9rem">
+    </p>
+
+  </div>
+
+</div>
+<!--Profile page-->
+<!-- PROFILE PAGE -->
+<div class="page" id="page-profile">
+  <div class="profile-card">
+    <h1>Your Profile</h1>
+    <div id="profile-avatar">
+      🦊
+    </div>
+    <input
+      type="text"
+      id="profile-username"
+      placeholder="Username"
+    >
+    <select id="profile-avatar-select">
+
+      <option>🦊</option>
+      <option>🐼</option>
+      <option>🐯</option>
+      <option>🐸</option>
+      <option>🐻</option>
+      <option>🦊</option>
+      <option>🐧</option>
+
+    </select>
+    <button onclick="saveProfile()">Save Profile</button>
+    <button
+  class="btn-ghost"
+  onclick="logoutUser()">Logout</button>
+  </div>
+</div>
+<!--Enter new password-->
+<!-- RESET PASSWORD PAGE -->
+<div class="page" id="page-reset">
+  <div class="profile-card">
+    <h1>Set New Password</h1>
+    <input
+      type="password"
+      id="new-password"
+      placeholder="New Password">
+    <button class="btn-hero" onclick="updatePassword()">Update Password</button>
+  </div>
+</div>
+<!-- ══ SOLO PAGE ══ -->
+<div class="page active" id="page-solo">
+  <div class="hero">
+    <h1>Maximize Your<br><em>Typing Speed</em></h1>
+    <p>Test your speed, track accuracy, and race friends live.</p>
+    <div class="hero-btns">
+      <button class="btn-hero" onclick="scrollToTest()">▶ Start Typing</button>
+      <button class="btn-ghost" onclick="showPage('multi')">⚔ Multiplayer</button>
+    </div>
+  </div>
+  <div class="stats-strip">
+    <div class="ss"><div class="big">209K+</div><small>Users</small></div>
+    <div class="ss"><div class="big">100M+</div><small>Tests</small></div>
+    <div class="ss"><div class="big">99.8%</div><small>Uptime</small></div>
+    <div class="ss"><div class="big">4.9★</div><small>Rating</small></div>
+  </div>
+  <div class="main">
+    <div class="card cfg-card">
+      <div class="cfg-left"><h3>Customize Your Test</h3><p>Pick difficulty and duration</p></div>
+      <div class="cfg-right">
+        <div class="cg">
+          <label>Difficulty</label>
+          <div class="pill-row" id="difficulty">
+            <span class="pill active" data-val="easy">Easy</span>
+            <span class="pill" data-val="medium">Medium</span>
+            <span class="pill" data-val="hard">Hard</span>
+          </div>
+        </div>
+        <div class="cg">
+          <label>Duration</label>
+          <select id="timer-select" class="csel">
+            <option value="15">15 sec</option>
+            <option value="30" selected>30 sec</option>
+            <option value="60">1 min</option>
+            <option value="120">2 min</option>
+            <option value="300">5 min</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="ls-grid">
+      <div class="lst"><small>Time Left</small><div class="val" id="timer-val">30</div></div>
+      <div class="lst"><small>WPM</small><div class="val" id="wpm-val">0</div></div>
+      <div class="lst"><small>Accuracy</small><div class="val" id="acc-val">100%</div></div>
+      <div class="lst"><small>Words</small><div class="val" id="words-done">0</div></div>
+    </div>
+    <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" id="progress"></div></div></div>
+    <div class="card typing-card" id="typing-box" onclick="handleBoxClick()">
+      <div class="t-header">
+        <div class="sbadge"><div class="sdot" id="sdot"></div><span id="stext">Click to start…</span></div>
+        <div class="brand-tag">ZenType Pro</div>
+      </div>
+      <div id="words"></div>
+      <input type="text" id="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="text">
+      <div id="mobile-input-wrap">
+        <input class="mobile-input" id="mobile-input" type="text" placeholder="Type here…" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="text" enterkeyhint="next">
+      </div>
+    </div>
+    <p class="hint">Press <kbd>Esc</kbd> to restart · <kbd>Space</kbd> to submit word</p>
+    <div class="actions"><button class="restart-btn" onclick="initGame()">↺ Restart</button></div>
+    <div class="card history-card">
+      <h3>📋 Recent Results <span class="cnt" id="hist-count">0 tests</span></h3>
+      <div id="history-body"><p class="no-hist">Complete a test to see history.</p></div>
+    </div>
+    <div class="sec-label"><h2>Feature Set</h2><p>Everything you need to level up your typing</p></div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-icon">⚡</div><h4>Real-time WPM</h4><p>Live speed as you type.</p></div>
+      <div class="feat-card"><div class="feat-icon">🎯</div><h4>Accuracy</h4><p>Char-level tracking.</p></div>
+      <div class="feat-card"><div class="feat-icon">⚔️</div><h4>Private Rooms</h4><p>Race friends with a code.</p></div>
+      <div class="feat-card"><div class="feat-icon">🌐</div><h4>Matchmaking</h4><p>Random online races.</p></div>
+      <div class="feat-card"><div class="feat-icon">👁️</div><h4>Spectator</h4><p>Watch live races.</p></div>
+      <div class="feat-card"><div class="feat-icon">🎨</div><h4>5 Themes</h4><p>Switch look anytime.</p></div>
+    </div>
+    <div class="cta-banner">
+      <div class="cta-inner">
+        <div><h3>Challenge friends to a live race!</h3><p>Create a private room and share the code</p></div>
+        <button class="btn-hero" onclick="showPage('multi')">⚔ Play Multiplayer →</button>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="stats-strip">
-  <div class="strip-stat"><div class="big">209K+</div><small>Active Users</small></div>
-  <div class="strip-stat"><div class="big">100M+</div><small>Tests Taken</small></div>
-  <div class="strip-stat"><div class="big">99.8%</div><small>Uptime</small></div>
-  <div class="strip-stat"><div class="big">4.9★</div><small>User Rating</small></div>
-</div>
-
-<div class="main">
-
-  <div class="card config-card">
-    <div class="config-left">
-      <h3>Customize Your Test</h3>
-      <p>Choose difficulty and duration to match your skill level</p>
+<!-- ══ MULTIPLAYER PAGE ══ -->
+<div class="page" id="page-multi">
+  <div class="mp-page">
+    <div class="mp-hero">
+      <h1>⚔️ Multiplayer Racing</h1>
+      <p>Race friends in private rooms, find opponents instantly, or spectate live matches</p>
     </div>
-    <div class="config-right">
-      <div class="cfg-group">
+
+    <!-- MODE SELECT -->
+    <div id="mp-mode-select">
+      <div class="mp-options">
+        <div class="mp-opt featured" onclick="showMpPanel('create')">
+          <div class="opt-icon">🏠</div>
+          <h3>Create Private Room</h3>
+          <p>Get a room code, share with friends, race together live</p>
+          <div class="opt-badge">Up to 8 players</div>
+        </div>
+        <div class="mp-opt" onclick="showMpPanel('join')">
+          <div class="opt-icon">🚪</div>
+          <h3>Join a Room</h3>
+          <p>Enter a room code from a friend to jump into their race</p>
+          <div class="opt-badge">Code required</div>
+        </div>
+        <div class="mp-opt" onclick="showMpPanel('random')">
+          <div class="opt-icon">🎲</div>
+          <h3>Random Match</h3>
+          <p>Get matched with online players instantly, same paragraph</p>
+          <div class="opt-badge">Online now: <span id="online-count">247</span></div>
+        </div>
+      </div>
+      <div class="mp-options" style="margin-bottom:0">
+        <div class="mp-opt" onclick="showMpPanel('spectate')">
+          <div class="opt-icon">👁️</div>
+          <h3>Spectate Live Race</h3>
+          <p>Watch ongoing matches with live cursors and leaderboard</p>
+          <div class="opt-badge">3 live now</div>
+        </div>
+        <div class="mp-opt" style="cursor:default;opacity:.6">
+          <div class="opt-icon">🏆</div>
+          <h3>Daily Tournament</h3>
+          <p>Compete in daily brackets, climb the leaderboard</p>
+          <div class="opt-badge">Coming soon</div>
+        </div>
+        <div class="mp-opt" style="cursor:default;opacity:.6">
+          <div class="opt-icon">📊</div>
+          <h3>Global Leaderboard</h3>
+          <p>See the fastest typists worldwide ranked by WPM</p>
+          <div class="opt-badge">Coming soon</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CREATE ROOM -->
+    <div class="mp-panel" id="panel-create">
+      <h2><button class="back-btn" onclick="showMpPanel(null)">← Back</button> Create Room</h2>
+      <div class="room-code-box">
+        <div class="room-code" id="room-code">ZT6-8K21</div>
+        <small>Share this code with friends</small>
+        <br><button class="copy-btn" onclick="copyCode()">📋 Copy Code</button>
+      </div>
+      <div class="cg" style="margin-bottom:16px">
         <label>Difficulty</label>
-        <div class="pill-row" id="difficulty">
+        <div class="pill-row" id="room-diff">
           <span class="pill active" data-val="easy">Easy</span>
           <span class="pill" data-val="medium">Medium</span>
           <span class="pill" data-val="hard">Hard</span>
         </div>
       </div>
-      <div class="cfg-group">
+      <div class="cg" style="margin-bottom:16px">
         <label>Duration</label>
-        <select id="timer-select" class="csel">
-          <option value="15">15 sec</option>
-          <option value="30" selected>30 sec</option>
-          <option value="60">1 min</option>
-          <option value="120">2 min</option>
-          <option value="300">5 min</option>
-        </select>
-      </div>
-    </div>
-  </div>
+        <div class="pill-row" id="room-dur">
+          <span class="pill" data-val="30">30s</span>
+          <span class="pill active" data-val="60">1 min</span>
+          <span class="pill" data-val="120">2 min</span>
+          <div class="cg" style="margin-bottom:16px">
+<!-- Bots -->
+  <label>Bots</label>
 
-  <div class="live-stats">
-    <div class="lstat"><div class="icon">⏱</div><small>Time Left</small><div class="val" id="timer-val">30</div></div>
-    <div class="lstat"><div class="icon">⚡</div><small>WPM</small><div class="val" id="wpm-val">0</div></div>
-    <div class="lstat"><div class="icon">🎯</div><small>Accuracy</small><div class="val" id="acc-val">100%</div></div>
-    <div class="lstat"><div class="icon">📝</div><small>Words Done</small><div class="val" id="words-done">0</div></div>
-  </div>
+  <div style="
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+  ">
 
-  <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" id="progress"></div></div></div>
+    <label style="
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:.9rem;
+    ">
 
-  <div class="card typing-card" id="typing-box" onclick="focusInput()">
-    <div class="typing-header">
-      <div class="status-badge"><div class="sdot" id="sdot"></div><span id="stext">Click to start typing…</span></div>
-      <div class="brand-tag">ZenType Pro</div>
-    </div>
-    <div id="words"></div>
-    <input type="text" id="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-  </div>
+      <input
+        type="checkbox"
+        id="enable-bots"
+        checked
+      >
 
-  <p class="hint">Press <kbd>Esc</kbd> to restart &nbsp;·&nbsp; <kbd>Space</kbd> to submit word &nbsp;·&nbsp; Timer starts on first keystroke</p>
-  <div class="actions"><button class="restart-btn" onclick="initGame()">↺ &nbsp;Restart Test</button></div>
+      Fill empty slots with bots
 
-  <div class="card history-card">
-    <h3>📋 Recent Results <span class="cnt" id="hist-count">0 tests</span></h3>
-    <div id="history-body"><p class="no-hist">No tests yet — complete a test to see your history.</p></div>
-  </div>
+    </label>
 
-  <div class="features">
-    <div class="sec-label"><h2>Comprehensive Feature Set</h2><p>Everything you need to improve your typing speed and accuracy</p></div>
-    <div class="feat-grid">
-      <div class="feat-card"><div class="feat-icon">⚡</div><h4>Real-time WPM</h4><p>Live words-per-minute calculation as you type for instant feedback.</p></div>
-      <div class="feat-card"><div class="feat-icon">🎯</div><h4>Accuracy Tracking</h4><p>Precise character-level accuracy so you know where to improve.</p></div>
-      <div class="feat-card"><div class="feat-icon">📊</div><h4>Difficulty Levels</h4><p>Three curated word banks — Easy, Medium, and Hard.</p></div>
-      <div class="feat-card"><div class="feat-icon">⏱</div><h4>Custom Durations</h4><p>Pick from 15 seconds to 5 minutes for any session.</p></div>
-      <div class="feat-card"><div class="feat-icon">🏆</div><h4>Result History</h4><p>All past tests logged with WPM, accuracy, and grade.</p></div>
-      <div class="feat-card"><div class="feat-icon">🎨</div><h4>5 Themes</h4><p>Purple, Mocha, Ocean, Obsidian, and High Contrast. Switch anytime.</p></div>
-    </div>
-  </div>
+    <select
+      id="bot-count"
+      style="
+        background:var(--a4);
+        border:2px solid var(--a3);
+        border-radius:10px;
+        color:var(--text);
+        padding:8px 12px;
+        font-size:.9rem;
+        outline:none;
+      "
+    >
 
-  <div class="cta-banner">
-    <div>
-      <h3>Ready? Let's Start with ZenType<br>and Get Awesome Experience</h3>
-      <p>Join 209,000+ typists improving their speed every day</p>
-    </div>
-    <button class="btn-hero" onclick="scrollToTest()">Start Free Now →</button>
+      <option value="1">1 Bot</option>
+      <option value="2" selected>2 Bots</option>
+      <option value="3">3 Bots</option>
+      <option value="4">4 Bots</option>
+      <option value="5">5 Bots</option>
+
+    </select>
+
   </div>
 
 </div>
+        </div>
+      </div>
+      <h4 style="font-size:.82rem;font-weight:700;margin-bottom:10px;color:var(--muted)">PLAYERS (3/8)</h4>
+      <div class="player-list" id="room-players">
+        <div class="player-row">
+          <div class="p-avatar" style="background:var(--a4);color:var(--a)">You</div>
+          <span class="p-name">You (Host)</span>
+          <span class="host-tag">HOST</span>
+          <span class="p-status">Ready</span>
+        </div>
+        <div class="player-row">
+          <div class="p-avatar" style="background:#fce7f3;color:#be185d">AK</div>
+          <span class="p-name">Alex_K</span>
+          <span class="p-status" style="color:var(--ok)">✓ Ready</span>
+        </div>
+        <div class="player-row">
+          <div class="p-avatar" style="background:#dcfce7;color:#15803d">PR</div>
+          <span class="p-name">PriyaR</span>
+          <span class="p-status">Waiting…</span>
+        </div>
+      </div>
+      <button class="restart-btn" onclick="startCountdown('create')" style="width:100%;justify-content:center">🚀 Start Race!</button>
+    </div>
 
+    <!-- JOIN ROOM -->
+    <div class="mp-panel" id="panel-join">
+      <h2><button class="back-btn" onclick="showMpPanel(null)">← Back</button> Join Room</h2>
+      <div style="margin-bottom:16px">
+        <label style="font-size:.75rem;font-weight:700;color:var(--a);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:6px">Room Code</label>
+        <div style="display:flex;gap:8px">
+          <input id="join-code" type="text" placeholder="e.g. ZT6-8K21" maxlength="8"
+            style="flex:1;background:var(--a4);border:2px solid var(--a3);border-radius:10px;color:var(--text);padding:10px 14px;font-size:1rem;font-family:monospace;font-weight:700;outline:none;letter-spacing:.1em;text-transform:uppercase"
+            autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false">
+          <button class="restart-btn" style="padding:10px 20px" onclick="joinRoom()">Join →</button>
+        </div>
+      </div>
+      <div id="join-result" style="display:none"></div>
+    </div>
+
+    <!-- ROOM LOBBY -->
+<div class="mp-panel" id="panel-lobby">
+
+  <h2>
+    <button class="back-btn" onclick="showMpPanel(null)">
+      ← Back
+    </button>
+
+    Room Lobby
+  </h2>
+
+  <div class="room-code-box">
+
+    <div class="room-code" id="lobby-room-code">
+      ROOM
+    </div>
+
+    <small>
+      Waiting for players...
+    </small>
+
+  </div>
+
+  <div
+    id="lobby-player-list"
+    class="player-list"
+    style="margin-top:16px">
+  </div>
+
+  <button
+    class="restart-btn"
+    style="width:100%;justify-content:center;margin-top:16px"
+    onclick="startRaceFromLobby()">
+
+    🚀 Start Race
+
+  </button>
+
+</div>
+
+    <!-- RANDOM MATCHMAKING -->
+    <div class="mp-panel" id="panel-random">
+      <h2><button class="back-btn" onclick="cancelMatch()">← Back</button> Random Match</h2>
+      <div id="mm-searching-view" class="mm-searching">
+        <div class="mm-spinner"></div>
+        <div class="mm-text" id="mm-text">Searching for players…</div>
+        <div class="mm-sub" id="mm-sub">247 players online right now</div>
+        <button class="mm-cancel" onclick="cancelMatch()">Cancel</button>
+      </div>
+      <div id="mm-found-view" style="display:none">
+        <div style="background:var(--a4);border-radius:12px;padding:14px;text-align:center;margin-bottom:16px">
+          <div style="font-size:.82rem;color:var(--muted);margin-bottom:4px">Match Found!</div>
+          <div style="font-size:1.1rem;font-weight:700">You vs <span id="mm-opponent">TypeMaster_99</span></div>
+        </div>
+        <div class="player-list">
+          <div class="player-row">
+            <div class="p-avatar" style="background:var(--a4);color:var(--a)">You</div>
+            <span class="p-name">You</span><span class="p-status" style="color:var(--ok)">Ready</span>
+          </div>
+          <div class="player-row">
+            <div class="p-avatar" style="background:#fce7f3;color:#be185d">TM</div>
+            <span class="p-name" id="mm-opp-name">TypeMaster_99</span><span class="p-status" style="color:var(--ok)">Ready</span>
+          </div>
+        </div>
+        <button class="restart-btn" style="width:100%;justify-content:center" onclick="startCountdown('random')">🚀 Race!</button>
+      </div>
+    </div>
+
+    <!-- SPECTATE -->
+    <div class="mp-panel" id="panel-spectate">
+      <h2><button class="back-btn" onclick="showMpPanel(null)">← Back</button> Live Spectator</h2>
+      <div class="spec-grid">
+        <div class="spec-main">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+            <div>
+              <div style="font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Room ZT6-SPEC · Live</div>
+              <div style="font-size:.7rem;color:var(--muted);margin-top:2px" id="spec-timer-display">Time: 00:42</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;background:var(--a4);border-radius:20px;padding:4px 12px">
+              <div class="sdot active"></div>
+              <span style="font-size:.73rem;font-weight:600;color:var(--a)">LIVE</span>
+            </div>
+          </div>
+          <div id="spec-players" class="race-players" style="margin-bottom:16px"></div>
+          <div style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Race Text</div>
+          <div id="spec-text" class="spec-text"></div>
+        </div>
+        <div class="spec-side">
+          <div class="spec-card">
+            <h4>🏆 Leaderboard</h4>
+            <div id="spec-lb"></div>
+          </div>
+          <div class="spec-card">
+            <h4>📊 Live Stats</h4>
+            <div id="spec-stats" style="font-size:.8rem;display:flex;flex-direction:column;gap:6px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RACE VIEW (shared for create/random) -->
+    <div class="race-view" id="race-view">
+      <div class="card" style="padding:20px">
+        <div class="race-header">
+          <div>
+            <div style="font-size:.8rem;color:var(--muted);margin-bottom:2px" id="race-mode-label">Private Room · ZT6-8K21</div>
+            <div class="race-timer" id="race-timer">1:00</div>
+          </div>
+          <div style="text-align:right">
+            <div class="race-status" id="race-status">Race in progress</div>
+            <div style="font-size:.75rem;color:var(--a);font-weight:700" id="race-your-wpm">Your WPM: 0</div>
+          </div>
+        </div>
+        <div id="race-player-bars" class="race-players"></div>
+        <div id="race-words" class="race-words"></div>
+        <input id="race-input" type="text" placeholder="Start typing…" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="text">
+        <button class="restart-btn" style="margin-top:4px" onclick="leaveRace()">✕ Leave Race</button>
+      </div>
+    </div>
+
+    <!-- RACE FINISH -->
+    <div id="race-finish" style="display:none">
+      <div class="card" style="padding:20px;margin-top:14px">
+        <div class="finish-banner">
+          <h3 id="fin-title">Race Complete! 🏆</h3>
+          <p id="fin-sub">You finished 1st out of 3 players</p>
+        </div>
+        <div class="podium" id="fin-podium"></div>
+        <div class="fin-grid" id="fin-stats"></div>
+        <div style="display:flex;gap:10px;margin-top:14px;justify-content:center;flex-wrap:wrap">
+          <button class="restart-btn" onclick="showMpPanel(null)">← Back to Lobby</button>
+          <button class="restart-btn" onclick="replayRace()" style="background:var(--a4);color:var(--a)">↺ Race Again</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- COUNTDOWN OVERLAY -->
+<div class="countdown-overlay" id="countdown-overlay">
+  <div class="countdown-num" id="countdown-num">3</div>
+  <div class="countdown-label" id="countdown-label">Get ready…</div>
+</div>
+
+<!-- SOLO RESULT OVERLAY -->
 <div class="overlay" id="overlay">
   <div class="result-card">
     <div class="trophy">🏆</div>
     <h2>Test Complete!</h2>
     <p class="sub">Here's how you performed</p>
     <div class="grade-badge" id="r-grade">Grade: B</div>
-    <div class="result-grid">
+    <div class="r-grid">
       <div class="r-stat"><small>WPM</small><div class="big" id="r-wpm">0</div></div>
       <div class="r-stat"><small>Accuracy</small><div class="big" id="r-acc">0%</div></div>
       <div class="r-stat"><small>Duration</small><div class="big" id="r-time">0s</div></div>
-      <div class="r-stat"><small>Words Done</small><div class="big" id="r-words">0</div></div>
+      <div class="r-stat"><small>Words</small><div class="big" id="r-words">0</div></div>
     </div>
-    <button class="restart-btn" style="width:100%;justify-content:center" onclick="initGame()">↺ &nbsp;Try Again</button>
+    <button class="restart-btn" style="width:100%;justify-content:center" onclick="initGame()">↺ Try Again</button>
   </div>
 </div>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
 <script src="script.js"></script>
 </body>
 </html>
