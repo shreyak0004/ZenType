@@ -161,7 +161,7 @@ if(!playerAvatar){
   );
 }
 
-const socket = io("http://localhost:3000");
+const socket =io("YOUR_RENDER_URL");
 socket.on("connect", () => {
   console.log("Connected to backend:", socket.id);
 });
